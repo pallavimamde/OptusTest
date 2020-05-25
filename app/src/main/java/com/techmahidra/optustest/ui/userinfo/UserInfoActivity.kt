@@ -2,13 +2,19 @@ package com.techmahidra.optustest.ui.userinfo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.techmahidra.optustest.R
+import com.techmahidra.optustest.data.response.UserImageInfo
 import com.techmahidra.optustest.utils.FragmentTransUtil.addFragment
+import com.techmahidra.optustest.utils.FragmentTransUtil.replaceFragment
 
 /*
 * Launching activity
 * */
 class UserInfoActivity : AppCompatActivity() {
+    companion object{
+        var selectedUserId  = 0
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
@@ -17,6 +23,12 @@ class UserInfoActivity : AppCompatActivity() {
 
     private fun addUserFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null)
-            addFragment(UserInfoFragment(), R.id.frameLayoutContainer) // add fragment
+            addFragment(UserInfoListFragment(), R.id.frameLayoutContainer) // add fragment
+    }
+    fun replaceUserFragment(fragment: Fragment){
+        replaceFragment(fragment, R.id.frameLayoutContainer)
+    }
+    fun replaceUserFragment(fragment: Fragment, imgInfo : UserImageInfo){
+        replaceFragment(fragment, R.id.frameLayoutContainer, imgInfo)
     }
 }

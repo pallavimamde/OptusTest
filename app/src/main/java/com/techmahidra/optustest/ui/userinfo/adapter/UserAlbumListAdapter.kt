@@ -4,27 +4,25 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.techmahidra.optustest.BR
 import com.techmahidra.optustest.R
+import com.techmahidra.optustest.BR
 import com.techmahidra.optustest.core.UserInfoApplication
-import com.techmahidra.optustest.data.response.UserInfoListResponse
-import com.techmahidra.optustest.databinding.AdapterUserInfoListBinding
-import com.techmahidra.optustest.ui.userinfo.UserInfoActivity.Companion.selectedUserId
+import com.techmahidra.optustest.data.response.UserImageInfo
+import com.techmahidra.optustest.data.response.UserAlbumListResponse
+import com.techmahidra.optustest.databinding.AdapterAlbumListBinding
 import com.techmahidra.optustest.utils.UserActionListener
 
-class UserInfoListAdapter(
+class UserAlbumListAdapter(
     private val userActionListener: UserActionListener,
-    private val userInfoList: ArrayList<UserInfoListResponse.UserInfoListResponseItem>
-) :
-    RecyclerView.Adapter<UserInfoListAdapter.ViewHolder>() {
-    private var rowIndex = -1 // default selected row index
-    private lateinit var binding : AdapterUserInfoListBinding
+    private val userAlbumList: ArrayList<UserAlbumListResponse.AlbumListResponseItem>) :
+    RecyclerView.Adapter<UserAlbumListAdapter.ViewHolder>() {
+    var rowIndex = -1 // default selected row index
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
 
-            binding = DataBindingUtil.inflate(
+        val binding: AdapterAlbumListBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            R.layout.adapter_user_info_list,
+            R.layout.adapter_album_list,
             parent,
             false
         )
@@ -33,33 +31,31 @@ class UserInfoListAdapter(
     }
 
     //get list item count
-    override fun getItemCount() = userInfoList.size
+    override fun getItemCount() = userAlbumList.size
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-        viewHolder.bind(userInfoList[position], position)
+        viewHolder.bind(userAlbumList[position], position)
     }
 
-    inner class ViewHolder(private val binding: AdapterUserInfoListBinding) :
+    inner class ViewHolder(private val binding: AdapterAlbumListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
-        private val rowUserInfoLayout = binding.constraintLayUserInfo
+        private val rowUserAlbumLayout = binding.constraintLayUserAlbum
 
         // bind data to view change bg color of selected item
-        fun bind(userInfo: UserInfoListResponse.UserInfoListResponseItem, position: Int) {
+        fun bind(userAlbum: UserAlbumListResponse.AlbumListResponseItem, position: Int) {
             binding.setVariable(
-                BR.userInfoModel, userInfo
+                BR.userAlbumModel, userAlbum
             )
-            binding.userInfoModel = userInfo
+            binding.userAlbumModel = userAlbum
             binding.executePendingBindings()
-
             if (rowIndex === position) {
-                rowUserInfoLayout.setBackgroundColor(
+                rowUserAlbumLayout.setBackgroundColor(
                     UserInfoApplication.applicationContext().resources.getColor(
                         R.color.colorDarkBlue
                     )
                 )
             } else {
-                rowUserInfoLayout.setBackgroundColor(
+                rowUserAlbumLayout.setBackgroundColor(
                     UserInfoApplication.applicationContext().resources.getColor(
                         R.color.colorBlue
                     )
@@ -68,11 +64,11 @@ class UserInfoListAdapter(
             }
             itemView.setOnClickListener {
                 rowIndex = position
-                selectedUserId = userInfoList[position].id
                 notifyDataSetChanged() // notify when data change
-                userActionListener.onClickAction()
+                userActionListener.onClickAction(UserImageInfo(userAlbumList[position].url,userAlbumList[position].title))
             }
         }
     }
+
 
 }

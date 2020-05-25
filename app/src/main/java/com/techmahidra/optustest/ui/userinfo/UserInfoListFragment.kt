@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -20,30 +21,31 @@ import androidx.recyclerview.widget.RecyclerView
 
 import com.techmahidra.optustest.R
 import com.techmahidra.optustest.core.UserInfoApplication
+import com.techmahidra.optustest.data.response.UserImageInfo
 import com.techmahidra.optustest.data.response.UserInfoListResponse
 import com.techmahidra.optustest.ui.userinfo.adapter.UserInfoListAdapter
 import com.techmahidra.optustest.ui.userinfo.viewmodel.UserInfoViewModel
 import com.techmahidra.optustest.utils.NetworkConnectionStatus
+import com.techmahidra.optustest.utils.UserActionListener
 import kotlinx.android.synthetic.main.fragment_user_info.*
 import kotlinx.android.synthetic.main.no_data_layout.*
 
 
 /**
  * A simple [Fragment] subclass.
- * Use the [UserInfoFragment.newInstance] factory method to
+ * Use the [UserInfoListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class UserInfoFragment : Fragment() {
+class UserInfoListFragment : Fragment(), UserActionListener {
 
 
     private var userInfoViewModel: UserInfoViewModel? = null
     private var userInfoListAdapter: RecyclerView.Adapter<UserInfoListAdapter.ViewHolder>? = null
     private lateinit var loadingDialog: Dialog
     private var isRefreshing = false
+    private val modifiedUserList: ArrayList<UserInfoListResponse.UserInfoListResponseItem> = ArrayList()
+    private var actionBar: ActionBar? = null
 
-    companion object {
-        val modifiedUserList: ArrayList<UserInfoListResponse.UserInfoListResponseItem> = ArrayList()
-    }
 
     // Inflate the layout for this fragment
     override fun onCreateView(
@@ -58,6 +60,8 @@ class UserInfoFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        actionBar = (activity as UserInfoActivity).supportActionBar
+        actionBar?.title = UserInfoApplication.applicationContext().resources.getString(R.string.user_info)
         showData()
         activity?.getWindow()?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         loadingDialog = Dialog(activity as AppCompatActivity)
@@ -131,8 +135,9 @@ class UserInfoFragment : Fragment() {
             // initialize the @UserInfoListAdapter and set list
             recyclerViewUserInfoList.layoutManager =
                 LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
-            userInfoListAdapter = UserInfoListAdapter(modifiedUserList)
+            userInfoListAdapter = UserInfoListAdapter(this,modifiedUserList)
             recyclerViewUserInfoList.adapter = userInfoListAdapter
+
         } else {
             showNoData()
         }
@@ -147,14 +152,14 @@ class UserInfoFragment : Fragment() {
 
     // show dialog while loading data from server
     fun showLoading(loadingMessage: String) {
-        loadingDialog.setContentView(R.layout.progress_bar)
-        loadingDialog.show()
+        /*  loadingDialog.setContentView(R.layout.progress_bar)
+          loadingDialog.show()*/
 
     }
 
     // hide loading
     fun hideLoading() {
-        loadingDialog.dismiss()
+        //loadingDialog.dismiss()
     }
 
     // if there is empty list then so no data layout
@@ -167,6 +172,14 @@ class UserInfoFragment : Fragment() {
     fun showData() {
         recyclerViewUserInfoList.visibility = View.VISIBLE
         textViewNoData.visibility = View.GONE
+    }
+
+    override fun onClickAction() {
+        (activity as UserInfoActivity).replaceUserFragment(UserAlbumListFragment())
+    }
+
+    override fun onClickAction(imageInfo: UserImageInfo) {
+
     }
 
 }

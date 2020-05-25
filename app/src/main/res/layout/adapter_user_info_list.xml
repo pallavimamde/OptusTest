@@ -7,6 +7,7 @@
         <variable
             name="userInfoModel"
             type="com.techmahidra.optustest.data.response.UserInfoListResponse.UserInfoListResponseItem" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/dimen_10"
-        android:background="@drawable/layout_blue_background">
+        android:background="@drawable/layout_blue_background"
+        >
 
         <TextView
             android:id="@+id/textViewUserId"
@@ -32,7 +34,8 @@
             app:layout_constraintBottom_toTopOf="@+id/textViewUserName"
             app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            />
 
         <TextView
             android:id="@+id/textViewUserName"
