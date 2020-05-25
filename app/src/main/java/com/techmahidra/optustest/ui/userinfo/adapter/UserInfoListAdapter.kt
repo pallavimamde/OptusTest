@@ -15,8 +15,7 @@ class UserInfoListAdapter(private val userInfoList: ArrayList<UserInfoListRespon
     var rowIndex = -1 // default selected row index
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
-        /*  val v = LayoutInflater.from(parent.context)
-              .inflate(R.layout.adapter_user_info_list, parent, false)*/
+
         val binding: AdapterUserInfoListBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.adapter_user_info_list,
@@ -36,11 +35,7 @@ class UserInfoListAdapter(private val userInfoList: ArrayList<UserInfoListRespon
 
     inner class ViewHolder(private val binding: AdapterUserInfoListBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val rowEmpLayout = binding.constraintLayUserInfo
-        /*  private val rowUserName = binding.textViewUserName
-          private val rowUserEmail = binding.textViewUserEmail
-          private val rowUserPhone = binding.textViewUserPhone
-          private val rowUserId = binding.textViewUserId*/
+        private val rowUserInfoLayout = binding.constraintLayUserInfo
 
         // bind data to view change bg color of selected item
         fun bind(userInfo: UserInfoListResponse.UserInfoListResponseItem, position: Int) {
@@ -50,19 +45,15 @@ class UserInfoListAdapter(private val userInfoList: ArrayList<UserInfoListRespon
             )
             binding.userInfoModel = userInfo
             binding.executePendingBindings()
-            /*  rowUserName.text = UserInfoApplication.applicationContext().resources.getString(R.string.name)+userInfo.name
-              rowUserEmail.text = UserInfoApplication.applicationContext().resources.getString(R.string.email)+userInfo.email
-              rowUserPhone.text = UserInfoApplication.applicationContext().resources.getString(R.string.phone)+userInfo.phone
-              rowUserId.text = UserInfoApplication.applicationContext().resources.getString(R.string.id)+userInfo.id.toString()*/
 
             if (rowIndex === position) {
-                rowEmpLayout.setBackgroundColor(
+                rowUserInfoLayout.setBackgroundColor(
                     UserInfoApplication.applicationContext().resources.getColor(
                         R.color.colorDarkBlue
                     )
                 )
             } else {
-                rowEmpLayout.setBackgroundColor(
+                rowUserInfoLayout.setBackgroundColor(
                     UserInfoApplication.applicationContext().resources.getColor(
                         R.color.colorBlue
                     )
