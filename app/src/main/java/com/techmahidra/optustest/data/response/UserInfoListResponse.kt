@@ -1,7 +1,10 @@
 package com.techmahidra.optustest.data.response
 
+import com.google.gson.annotations.SerializedName
 
-class UserInfoListResponse : ArrayList<UserInfoListResponse.UserInfoListResponseItem>(){
+/*
+* UserInfoListResponse - Userinfo list in the format of server response type */
+class UserInfoListResponse : ArrayList<UserInfoListResponse.UserInfoListResponseItem>() {
     data class UserInfoListResponseItem(
         val address: Address,
         val company: Company,
@@ -32,3 +35,4 @@ class UserInfoListResponse : ArrayList<UserInfoListResponse.UserInfoListResponse
         )
     }
 }
+

@@ -26,13 +26,13 @@
             app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@mipmap/ic_launcher"
-            app:imageUrl="@{userAlbumModel.thumbnailUrl}"/>
+          />
 
         <TextView
             android:id="@+id/textViewThumbnailInfo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_20"
+            android:layout_marginStart="@dimen/dimen_20"
             android:autoSizeMaxTextSize="@dimen/textsize_100"
             android:autoSizePresetSizes="@array/autosize_text_sizes"
             android:text="@{userAlbumModel.title}"

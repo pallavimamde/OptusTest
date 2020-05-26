@@ -17,12 +17,11 @@ class UserInfoListAdapter(
     private val userInfoList: ArrayList<UserInfoListResponse.UserInfoListResponseItem>
 ) :
     RecyclerView.Adapter<UserInfoListAdapter.ViewHolder>() {
-    private var rowIndex = -1 // default selected row index
-    private lateinit var binding : AdapterUserInfoListBinding
+    private lateinit var binding: AdapterUserInfoListBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
 
-            binding = DataBindingUtil.inflate(
+        binding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.adapter_user_info_list,
             parent,
@@ -52,22 +51,7 @@ class UserInfoListAdapter(
             binding.userInfoModel = userInfo
             binding.executePendingBindings()
 
-            if (rowIndex === position) {
-                rowUserInfoLayout.setBackgroundColor(
-                    UserInfoApplication.applicationContext().resources.getColor(
-                        R.color.colorDarkBlue
-                    )
-                )
-            } else {
-                rowUserInfoLayout.setBackgroundColor(
-                    UserInfoApplication.applicationContext().resources.getColor(
-                        R.color.colorBlue
-                    )
-                )
-
-            }
             itemView.setOnClickListener {
-                rowIndex = position
                 selectedUserId = userInfoList[position].id
                 notifyDataSetChanged() // notify when data change
                 userActionListener.onClickAction()

@@ -11,15 +11,17 @@ import com.techmahidra.optustest.data.response.UserImageInfo
 import com.techmahidra.optustest.data.response.UserAlbumListResponse
 import com.techmahidra.optustest.databinding.AdapterAlbumListBinding
 import com.techmahidra.optustest.utils.UserActionListener
+import com.techmahidra.optustest.utils.loadImage
 
+/*
+* UserAlbumListAdapter - bind the data to UI component, which is helps to show Userinfo list
+* */
 class UserAlbumListAdapter(
     private val userActionListener: UserActionListener,
     private val userAlbumList: ArrayList<UserAlbumListResponse.AlbumListResponseItem>) :
     RecyclerView.Adapter<UserAlbumListAdapter.ViewHolder>() {
-    var rowIndex = -1 // default selected row index
 
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
-
         val binding: AdapterAlbumListBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             R.layout.adapter_album_list,
@@ -43,29 +45,17 @@ class UserAlbumListAdapter(
 
         // bind data to view change bg color of selected item
         fun bind(userAlbum: UserAlbumListResponse.AlbumListResponseItem, position: Int) {
+            binding.imageViewThumbnail.loadImage(userAlbumList[position].thumbnailUrl)
+
             binding.setVariable(
                 BR.userAlbumModel, userAlbum
             )
             binding.userAlbumModel = userAlbum
             binding.executePendingBindings()
-            if (rowIndex === position) {
-                rowUserAlbumLayout.setBackgroundColor(
-                    UserInfoApplication.applicationContext().resources.getColor(
-                        R.color.colorDarkBlue
-                    )
-                )
-            } else {
-                rowUserAlbumLayout.setBackgroundColor(
-                    UserInfoApplication.applicationContext().resources.getColor(
-                        R.color.colorBlue
-                    )
-                )
 
-            }
             itemView.setOnClickListener {
-                rowIndex = position
                 notifyDataSetChanged() // notify when data change
-                userActionListener.onClickAction(UserImageInfo(userAlbumList[position].url,userAlbumList[position].title))
+                userActionListener.onClickAction(UserImageInfo(userAlbumList[position].url,userAlbumList[position].title,userAlbumList[position].id.toString(),userAlbumList[position].albumId.toString()))
             }
         }
     }

@@ -1,6 +1,8 @@
 package com.techmahidra.optustest.data.response
 
-
+/*
+* UserAlbumListResponse - User album list of server response type
+* */
 class UserAlbumListResponse : ArrayList<UserAlbumListResponse.AlbumListResponseItem>(){
     data class AlbumListResponseItem(
         val albumId: Int, // 100

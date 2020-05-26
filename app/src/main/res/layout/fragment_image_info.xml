@@ -17,28 +17,63 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewAlbumId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dimen_10"
+                android:autoSizeMaxTextSize="@dimen/textsize_100"
+                android:autoSizePresetSizes="@array/autosize_text_sizes"
+                android:gravity="center"
+                android:text="@{@string/album_id.concat(imageInfo.albumId)}"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                app:autoSizeMinTextSize="@dimen/textsize_14"
+                app:autoSizeStepGranularity="@dimen/textsize_2"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/textViewPhotoId"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/textViewPhotoId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dimen_10"
+                android:autoSizeMaxTextSize="@dimen/textsize_100"
+                android:autoSizePresetSizes="@array/autosize_text_sizes"
+                android:gravity="center"
+                android:text="@{@string/photo_id.concat(imageInfo.photoId)}"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                app:autoSizeMinTextSize="@dimen/textsize_14"
+                app:autoSizeStepGranularity="@dimen/textsize_2"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/imageViewUserImage"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAlbumId"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <ImageView
-                android:id="@+id/imageViewSelected"
-                android:layout_width="0dp"
+                android:id="@+id/imageViewUserImage"
+                android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dimen_10"
                 android:background="@drawable/layout_orange_background"
                 app:imageUrl="@{imageInfo.url}"
-                android:padding="@dimen/dimen_10"
                 app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
-                app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-                app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPhotoId"
                 app:srcCompat="@mipmap/ic_launcher" />
 
 
             <TextView
                 android:id="@+id/textViewImageInfo"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:padding="@dimen/dimen_10"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_marginVertical="@dimen/dimen_20"
                 android:autoSizeMaxTextSize="@dimen/textsize_100"
                 android:autoSizePresetSizes="@array/autosize_text_sizes"
@@ -50,23 +85,7 @@
                 app:autoSizeStepGranularity="@dimen/textsize_2"
                 app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-                app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontal" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineLeft"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.04" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guidelineRight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.96" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineHorizontal"
@@ -74,6 +93,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.86" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

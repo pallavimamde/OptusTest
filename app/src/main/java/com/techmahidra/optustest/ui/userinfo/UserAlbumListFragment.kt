@@ -32,13 +32,10 @@ import kotlinx.android.synthetic.main.fragment_album_list.*
 import kotlinx.android.synthetic.main.fragment_user_info.swipeRefreshLayout
 import kotlinx.android.synthetic.main.no_data_layout.*
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+
 
 /**
  * A simple [Fragment] subclass.
- * Use the [AlbumListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class UserAlbumListFragment : Fragment(), UserActionListener {
@@ -47,7 +44,8 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
     private var userAlbumListAdapter: RecyclerView.Adapter<UserAlbumListAdapter.ViewHolder>? = null
     private lateinit var loadingDialog: Dialog
     private var isRefreshing = false
-    private val modifiedUserAlbumList: ArrayList<UserAlbumListResponse.AlbumListResponseItem> = ArrayList()
+    private val modifiedUserAlbumList: ArrayList<UserAlbumListResponse.AlbumListResponseItem> =
+        ArrayList()
     private var actionBar: ActionBar? = null
 
 
@@ -65,7 +63,8 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         actionBar = (activity as UserInfoActivity).supportActionBar
-        actionBar?.title = UserInfoApplication.applicationContext().resources.getString(R.string.album_id) + selectedUserId
+        actionBar?.title =
+            UserInfoApplication.applicationContext().resources.getString(R.string.album_id) + selectedUserId
         showData()
         activity?.getWindow()?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         loadingDialog = Dialog(activity as AppCompatActivity)
@@ -90,16 +89,25 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
             NetworkConnectionStatus(UserInfoApplication.applicationContext()).isOnline()
         if (hasInternetConnected) {
             if (!isRefreshing) { // if default refreshing is visible don't show loading dialog
-                showLoading(
-                    UserInfoApplication.applicationContext().resources.getString(
-                        R.string.please_wait
-                    )
-                )
+                showLoading()
             }
             // check the observer when api response is success and update list
             userInfoViewModel?.userAlbumListLiveData?.observe(
                 viewLifecycleOwner, Observer { userAlbumListResponse ->
-                    updateUI(userAlbumListResponse)
+                    if (UserInfoViewModel.callbackResponse.equals(
+                            UserInfoApplication.applicationContext().resources.getString(
+                                R.string.success
+                            )
+                        )
+                    ) {
+                        updateUI(userAlbumListResponse)
+                    } else {
+                        Toast.makeText(
+                            UserInfoApplication.applicationContext(),
+                            UserInfoViewModel.callbackResponse,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                     hideLoading()
                 })
 
@@ -150,7 +158,7 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
     }
 
     // show dialog while loading data from server
-    fun showLoading(loadingMessage: String) {
+    fun showLoading() {
         loadingDialog.setContentView(R.layout.progress_bar)
         loadingDialog.show()
 
@@ -177,8 +185,11 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
 
     }
 
-    override fun onClickAction(imageInfo : UserImageInfo) {
-        (activity as UserInfoActivity).replaceUserFragment(UserAlbumImageInfoFragment(), imageInfo)
+    override fun onClickAction(imageInfo: UserImageInfo) {
+        (activity as UserInfoActivity).replaceUserFragment(
+            UserAlbumImageInfoFragment(),
+            imageInfo
+        )
     }
 
 }

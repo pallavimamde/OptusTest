@@ -25,6 +25,7 @@ import com.techmahidra.optustest.data.response.UserImageInfo
 import com.techmahidra.optustest.data.response.UserInfoListResponse
 import com.techmahidra.optustest.ui.userinfo.adapter.UserInfoListAdapter
 import com.techmahidra.optustest.ui.userinfo.viewmodel.UserInfoViewModel
+import com.techmahidra.optustest.ui.userinfo.viewmodel.UserInfoViewModel.Companion.callbackResponse
 import com.techmahidra.optustest.utils.NetworkConnectionStatus
 import com.techmahidra.optustest.utils.UserActionListener
 import kotlinx.android.synthetic.main.fragment_user_info.*
@@ -33,7 +34,6 @@ import kotlinx.android.synthetic.main.no_data_layout.*
 
 /**
  * A simple [Fragment] subclass.
- * Use the [UserInfoListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
 class UserInfoListFragment : Fragment(), UserActionListener {
@@ -43,7 +43,8 @@ class UserInfoListFragment : Fragment(), UserActionListener {
     private var userInfoListAdapter: RecyclerView.Adapter<UserInfoListAdapter.ViewHolder>? = null
     private lateinit var loadingDialog: Dialog
     private var isRefreshing = false
-    private val modifiedUserList: ArrayList<UserInfoListResponse.UserInfoListResponseItem> = ArrayList()
+    private val modifiedUserList: ArrayList<UserInfoListResponse.UserInfoListResponseItem> =
+        ArrayList()
     private var actionBar: ActionBar? = null
 
 
@@ -61,7 +62,8 @@ class UserInfoListFragment : Fragment(), UserActionListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         actionBar = (activity as UserInfoActivity).supportActionBar
-        actionBar?.title = UserInfoApplication.applicationContext().resources.getString(R.string.user_info)
+        actionBar?.title =
+            UserInfoApplication.applicationContext().resources.getString(R.string.user_info)
         showData()
         activity?.getWindow()?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
         loadingDialog = Dialog(activity as AppCompatActivity)
@@ -86,17 +88,27 @@ class UserInfoListFragment : Fragment(), UserActionListener {
             NetworkConnectionStatus(UserInfoApplication.applicationContext()).isOnline()
         if (hasInternetConnected) {
             if (!isRefreshing) { // if default refreshing is visible don't show loading dialog
-                showLoading(
-                    UserInfoApplication.applicationContext().resources.getString(
-                        R.string.please_wait
-                    )
-                )
+                showLoading()
             }
             // check the observer when api response is success and update list
             userInfoViewModel?.userInfoListLiveData?.observe(
                 viewLifecycleOwner, Observer { userInfoListResponse ->
-                    updateUI(userInfoListResponse)
+                    if (callbackResponse.equals(
+                            UserInfoApplication.applicationContext().resources.getString(
+                                R.string.success
+                            )
+                        )
+                    ) {
+                        updateUI(userInfoListResponse)
+                    } else {
+                        Toast.makeText(
+                            UserInfoApplication.applicationContext(),
+                            callbackResponse,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                     hideLoading()
+
                 })
 
         } else {
@@ -135,7 +147,7 @@ class UserInfoListFragment : Fragment(), UserActionListener {
             // initialize the @UserInfoListAdapter and set list
             recyclerViewUserInfoList.layoutManager =
                 LinearLayoutManager(activity, LinearLayout.VERTICAL, false)
-            userInfoListAdapter = UserInfoListAdapter(this,modifiedUserList)
+            userInfoListAdapter = UserInfoListAdapter(this, modifiedUserList)
             recyclerViewUserInfoList.adapter = userInfoListAdapter
 
         } else {
@@ -151,15 +163,15 @@ class UserInfoListFragment : Fragment(), UserActionListener {
     }
 
     // show dialog while loading data from server
-    fun showLoading(loadingMessage: String) {
-        /*  loadingDialog.setContentView(R.layout.progress_bar)
-          loadingDialog.show()*/
+    fun showLoading() {
+          loadingDialog.setContentView(R.layout.progress_bar)
+          loadingDialog.show()
 
     }
 
     // hide loading
     fun hideLoading() {
-        //loadingDialog.dismiss()
+        loadingDialog.dismiss()
     }
 
     // if there is empty list then so no data layout
