@@ -33,12 +33,9 @@ import kotlinx.android.synthetic.main.no_data_layout.*
 
 
 /**
- * A simple [Fragment] subclass.
- * create an instance of this fragment.
+ * UserInfoListFragment - This fragment helps to show userinfo list and set action bar title
  */
 class UserInfoListFragment : Fragment(), UserActionListener {
-
-
     private var userInfoViewModel: UserInfoViewModel? = null
     private var userInfoListAdapter: RecyclerView.Adapter<UserInfoListAdapter.ViewHolder>? = null
     private lateinit var loadingDialog: Dialog
@@ -61,6 +58,14 @@ class UserInfoListFragment : Fragment(), UserActionListener {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        init()
+
+
+    }
+
+    // view initialization and definition
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun init() {
         actionBar = (activity as UserInfoActivity).supportActionBar
         actionBar?.title =
             UserInfoApplication.applicationContext().resources.getString(R.string.user_info)
@@ -75,9 +80,7 @@ class UserInfoListFragment : Fragment(), UserActionListener {
             isRefreshing = true
             loadData(isRefreshing)
             swipeRefreshLayout.isRefreshing = false
-        }
-
-    }
+        }    }
 
 
     // get data from server
@@ -116,7 +119,7 @@ class UserInfoListFragment : Fragment(), UserActionListener {
         }
     }
 
-    // update UI
+    // update UI with help of adapter, set adapter, pass data to adpater
     @SuppressLint("WrongConstant")
     fun updateUI(response: List<UserInfoListResponse.UserInfoListResponseItem>) {
         if (response.isNotEmpty()) {
@@ -186,6 +189,7 @@ class UserInfoListFragment : Fragment(), UserActionListener {
         textViewNoData.visibility = View.GONE
     }
 
+    // replace fragment on item click
     override fun onClickAction() {
         (activity as UserInfoActivity).replaceUserFragment(UserAlbumListFragment())
     }

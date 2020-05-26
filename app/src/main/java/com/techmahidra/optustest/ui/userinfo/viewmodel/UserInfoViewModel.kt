@@ -6,6 +6,9 @@ import com.techmahidra.optustest.data.repository.UserInfoRepository
 import com.techmahidra.optustest.data.response.UserAlbumListResponse
 import com.techmahidra.optustest.data.response.UserInfoListResponse
 
+/*
+* UserInfoViewModel - Viewmodel class to responsible for preparing and managing data(response)
+* */
 class UserInfoViewModel : ViewModel() {
     companion object {
         lateinit var callbackResponse: String
@@ -14,7 +17,7 @@ class UserInfoViewModel : ViewModel() {
     // repository instance
     private val userInfoRepository = UserInfoRepository()
 
-    // get user list from server and save in livedata
+    // get user info list from server and save in livedata , return data to fragment using observer
     val userInfoListLiveData: LiveData<List<UserInfoListResponse.UserInfoListResponseItem>>
         get() = userInfoRepository.getUserInfoListMutableLiveData(
             object : UserInfoRepository.RetryableCallback {
@@ -26,6 +29,8 @@ class UserInfoViewModel : ViewModel() {
                     callbackResponse = error
                 }
             })
+
+    // get user album list from server and save in livedata , return data to fragment using observer
     val userAlbumListLiveData: LiveData<List<UserAlbumListResponse.AlbumListResponseItem>>
         get() = userInfoRepository.getUserAlbumListMutableLiveData(object :
             UserInfoRepository.RetryableCallback {

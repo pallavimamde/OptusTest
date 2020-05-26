@@ -28,7 +28,7 @@ class UserInfoRepository() {
     private var userAlbumListMutableLiveData =
         MutableLiveData<List<UserAlbumListResponse.AlbumListResponseItem>>()
 
-
+    // CoroutineScope -  keeps tracks of all coroutine
     val completableJob = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.IO + completableJob)
 

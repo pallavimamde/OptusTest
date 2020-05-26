@@ -19,6 +19,8 @@ class UserInfoListAdapter(
     RecyclerView.Adapter<UserInfoListAdapter.ViewHolder>() {
     private lateinit var binding: AdapterUserInfoListBinding
 
+
+    // bind layout to set the data to views
     override fun onCreateViewHolder(parent: ViewGroup, p1: Int): ViewHolder {
 
         binding = DataBindingUtil.inflate(
@@ -34,6 +36,7 @@ class UserInfoListAdapter(
     //get list item count
     override fun getItemCount() = userInfoList.size
 
+    // bind viewholder with data
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.bind(userInfoList[position], position)
     }

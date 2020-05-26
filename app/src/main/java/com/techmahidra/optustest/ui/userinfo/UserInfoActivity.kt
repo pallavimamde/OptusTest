@@ -21,13 +21,18 @@ class UserInfoActivity : AppCompatActivity() {
         addUserFragment(savedInstanceState)
     }
 
+    // add fragment
     private fun addUserFragment(savedInstanceState: Bundle?) {
         if (savedInstanceState == null)
             addFragment(UserInfoListFragment(), R.id.frameLayoutContainer) // add fragment
     }
+
+    // replace fragment
     fun replaceUserFragment(fragment: Fragment){
         replaceFragment(fragment, R.id.frameLayoutContainer)
     }
+
+    // replace fragment with pass data
     fun replaceUserFragment(fragment: Fragment, imgInfo : UserImageInfo){
         replaceFragment(fragment, R.id.frameLayoutContainer, imgInfo)
     }

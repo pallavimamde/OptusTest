@@ -3,6 +3,9 @@ package com.techmahidra.optustest.core
 import android.app.Application
 import android.content.Context
 
+/*
+* UserInfoApplication -  Its base application class and its singleton instance using companion obj is used in application
+* */
 class UserInfoApplication :Application() {
 
     init {

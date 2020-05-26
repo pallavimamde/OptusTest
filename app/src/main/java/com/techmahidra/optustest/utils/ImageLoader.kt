@@ -14,22 +14,4 @@ fun ImageView.loadImage(url: String?) {
         .get()
         .load(url)
         .into(this)
-    /*val imageLoader = ImageLoader.Builder(context)
-        .crossfade(true)
-        .okHttpClient {
-            OkHttpClient.Builder()
-                .cache(CoilUtils.createDefaultCache(context))
-                .build()
-        }
-        .build()
-    Coil.setImageLoader(imageLoader)*/
-    /*  val options = RequestOptions()
-          .placeholder(R.mipmap.ic_launcher_round)
-          .circleCrop()
-          .error(R.mipmap.ic_launcher_round)
-
-      Glide.with(this.context)
-          .setDefaultRequestOptions(options)
-          .load(uri)
-          .into(this)*/
 }

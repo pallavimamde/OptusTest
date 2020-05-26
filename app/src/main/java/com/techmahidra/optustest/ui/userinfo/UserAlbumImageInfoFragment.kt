@@ -21,8 +21,7 @@ import kotlinx.android.synthetic.main.fragment_user_info.swipeRefreshLayout
 
 
 /**
- * A simple [Fragment] subclass.
- * create an instance of this fragment.
+ * UserAlbumImageInfoFragment - This fragment helps to display image info with set the actionbar title
  */
 class UserAlbumImageInfoFragment : Fragment() {
 
@@ -62,7 +61,7 @@ class UserAlbumImageInfoFragment : Fragment() {
         }
 
     }
-
+// Load image using Picasso
     private fun loadData() {
         binding.imageInfo = userImageInfo
         binding.imageViewUserImage.loadImage(binding.imageInfo?.url.toString())

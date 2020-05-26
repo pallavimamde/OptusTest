@@ -5,7 +5,7 @@ import android.net.ConnectivityManager
 import android.os.Build
 import androidx.annotation.RequiresApi
 
-/* *
+/*
 * NetworkConnectionStatus - Check network connection
 * */
 class NetworkConnectionStatus(private val applicationContext: Context) : NetworkStatus {

@@ -33,12 +33,15 @@ interface ApiService {
     companion object {
 
         fun createCorService(): ApiService {
+
+            // build okhttpclient obj
             val okHttpClient = OkHttpClient.Builder()
                 .connectTimeout(1, TimeUnit.MINUTES)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(15, TimeUnit.SECONDS)
                 .build()
 
+            // build retrofit obj
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

@@ -33,10 +33,8 @@ import kotlinx.android.synthetic.main.fragment_user_info.swipeRefreshLayout
 import kotlinx.android.synthetic.main.no_data_layout.*
 
 
-
 /**
- * A simple [Fragment] subclass.
- * create an instance of this fragment.
+ * UserAlbumListFragment - This fragment helps to display list of album details with set action bar title with album id
  */
 class UserAlbumListFragment : Fragment(), UserActionListener {
 
@@ -62,6 +60,12 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        init()
+    }
+
+    // initialization of views
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun init() {
         actionBar = (activity as UserInfoActivity).supportActionBar
         actionBar?.title =
             UserInfoApplication.applicationContext().resources.getString(R.string.album_id) + selectedUserId
@@ -77,7 +81,6 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
             loadUserAlbumData(isRefreshing)
             swipeRefreshLayout.isRefreshing = false
         }
-
     }
 
 
@@ -116,7 +119,7 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
         }
     }
 
-    // update UI
+    // update UI using adapter
     @SuppressLint("WrongConstant")
     fun updateUI(response: List<UserAlbumListResponse.AlbumListResponseItem>) {
         if (response.isNotEmpty()) {
@@ -185,6 +188,7 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
 
     }
 
+    // on click of recyclerview item replace UserAlbumImageInfoFragment
     override fun onClickAction(imageInfo: UserImageInfo) {
         (activity as UserInfoActivity).replaceUserFragment(
             UserAlbumImageInfoFragment(),
