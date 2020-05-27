@@ -69,16 +69,15 @@ class UserInfoListFragment : Fragment(), UserActionListener {
         actionBar = (activity as UserInfoActivity).supportActionBar
         actionBar?.title =
             UserInfoApplication.applicationContext().resources.getString(R.string.user_info)
-        showData()
-        activity?.getWindow()?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
+        showUserData()
         loadingDialog = Dialog(activity as AppCompatActivity)
         loadingDialog.setCancelable(false)
         loadingDialog.setCanceledOnTouchOutside(false)
         userInfoViewModel = ViewModelProviders.of(this).get(UserInfoViewModel::class.java)
-        loadData()
+        loadUserData()
         swipeRefreshLayout.setOnRefreshListener {
             isRefreshing = true
-            loadData(isRefreshing)
+            loadUserData(isRefreshing)
             swipeRefreshLayout.isRefreshing = false
         }
     }
@@ -86,7 +85,7 @@ class UserInfoListFragment : Fragment(), UserActionListener {
 
     // get data from server
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun loadData(isRefreshing: Boolean = false) {
+    private fun loadUserData(isRefreshing: Boolean = false) {
         // check internet connection
         val hasInternetConnected =
             NetworkConnectionStatus(UserInfoApplication.applicationContext()).isOnline()
@@ -103,7 +102,7 @@ class UserInfoListFragment : Fragment(), UserActionListener {
                             )
                         )
                     ) {
-                        updateUI(userInfoListResponse)
+                        updateUserUI(userInfoListResponse)
                     } else {
                         Toast.makeText(
                             UserInfoApplication.applicationContext(),
@@ -122,7 +121,7 @@ class UserInfoListFragment : Fragment(), UserActionListener {
 
     // update UI with help of adapter, set adapter, pass data to adpater
     @SuppressLint("WrongConstant")
-    fun updateUI(response: List<UserInfoListResponse.UserInfoListResponseItem>) {
+    fun updateUserUI(response: List<UserInfoListResponse.UserInfoListResponseItem>) {
         if (response.isNotEmpty()) {
 
             modifiedUserList.clear()
@@ -185,7 +184,7 @@ class UserInfoListFragment : Fragment(), UserActionListener {
     }
 
     // show userinfo list if list available else show no data view
-    fun showData() {
+    fun showUserData() {
         recyclerViewUserInfoList.visibility = View.VISIBLE
         textViewNoData.visibility = View.GONE
     }

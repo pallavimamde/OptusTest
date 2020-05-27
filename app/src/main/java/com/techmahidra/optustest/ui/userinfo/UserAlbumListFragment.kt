@@ -67,10 +67,8 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun init() {
         actionBar = (activity as UserInfoActivity).supportActionBar
-        actionBar?.title =
-            UserInfoApplication.applicationContext().resources.getString(R.string.album_id) + selectedUserId
-        showData()
-        activity?.getWindow()?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
+        actionBar?.hide()
+        showUserData()
         loadingDialog = Dialog(activity as AppCompatActivity)
         loadingDialog.setCancelable(false)
         loadingDialog.setCanceledOnTouchOutside(false)
@@ -103,7 +101,7 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
                             )
                         )
                     ) {
-                        updateUI(userAlbumListResponse)
+                        updateUserUI(userAlbumListResponse)
                     } else {
                         Toast.makeText(
                             UserInfoApplication.applicationContext(),
@@ -121,9 +119,9 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
 
     // update UI using adapter
     @SuppressLint("WrongConstant")
-    fun updateUI(response: List<UserAlbumListResponse.AlbumListResponseItem>) {
+    fun updateUserUI(response: List<UserAlbumListResponse.AlbumListResponseItem>) {
         if (response.isNotEmpty()) {
-
+            textViewAlbumIdTitle.text = UserInfoApplication.applicationContext().resources.getString(R.string.album_id) + selectedUserId
             modifiedUserAlbumList.clear()
             for (item in response) {
                 var isAllNull = false
@@ -179,7 +177,7 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
     }
 
     // show employee list if list available else show no data view
-    fun showData() {
+    fun showUserData() {
         recyclerViewUserAlbumList.visibility = View.VISIBLE
         textViewNoData.visibility = View.GONE
     }

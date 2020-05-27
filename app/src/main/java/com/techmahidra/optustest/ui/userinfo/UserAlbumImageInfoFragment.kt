@@ -40,7 +40,7 @@ class UserAlbumImageInfoFragment : Fragment() {
             container,
             false
         )
-        loadData()
+        loadUserData()
         return binding.getRoot()
     }
 
@@ -49,7 +49,7 @@ class UserAlbumImageInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         actionBar = (activity as UserInfoActivity).supportActionBar
-        actionBar?.title =
+        actionBar?.hide()
             UserInfoApplication.applicationContext().resources.getString(R.string.photo_id) + binding.imageInfo?.photoId
 
         swipeRefreshLayout.setOnRefreshListener {
@@ -60,7 +60,7 @@ class UserAlbumImageInfoFragment : Fragment() {
     }
 
     // Load image using Picasso
-    private fun loadData() {
+    private fun loadUserData() {
         binding.imageInfo = userImageInfo
         binding.imageViewUserImage.loadImage(binding.imageInfo?.url.toString())
         binding.executePendingBindings()

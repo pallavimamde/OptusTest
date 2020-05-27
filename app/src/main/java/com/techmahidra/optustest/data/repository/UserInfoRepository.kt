@@ -19,7 +19,6 @@ import retrofit2.HttpException
 @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class UserInfoRepository() {
 
-
     // mutable objects helps to save the server response in the form of different response type
     private var user = mutableListOf<UserInfoListResponse.UserInfoListResponseItem>()
     private var userInfoListMutableLiveData =

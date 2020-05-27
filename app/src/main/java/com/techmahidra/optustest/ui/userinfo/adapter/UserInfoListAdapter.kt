@@ -1,15 +1,19 @@
 package com.techmahidra.optustest.ui.userinfo.adapter
 
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.techmahidra.optustest.BR
 import com.techmahidra.optustest.R
+import com.techmahidra.optustest.core.UserInfoApplication
 import com.techmahidra.optustest.data.response.UserInfoListResponse
 import com.techmahidra.optustest.databinding.AdapterUserInfoListBinding
 import com.techmahidra.optustest.ui.userinfo.UserInfoActivity.Companion.selectedUserId
 import com.techmahidra.optustest.utils.UserActionListener
+
 
 class UserInfoListAdapter(
     private val userActionListener: UserActionListener,
@@ -50,6 +54,14 @@ class UserInfoListAdapter(
             binding.setVariable(
                 BR.userInfoModel, userInfo
             )
+
+            val content = SpannableString(
+                (UserInfoApplication.applicationContext().resources.getString(R.string.email)) +
+                        userInfoList[position].email
+            )
+            content.setSpan(UnderlineSpan(), 7, content.length, 0)
+            binding.textViewUserEmail.text = content
+
             binding.userInfoModel = userInfo
             binding.executePendingBindings()
 

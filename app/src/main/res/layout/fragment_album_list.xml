@@ -17,6 +17,25 @@
             android:focusable="true"
             android:focusableInTouchMode="true">
 
+            <TextView
+                android:id="@+id/textViewAlbumIdTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dimen_10"
+                android:autoSizeMaxTextSize="@dimen/textsize_100"
+                android:autoSizePresetSizes="@array/autosize_text_sizes"
+                android:text="@{userAlbumModel.title}"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                app:autoSizeMinTextSize="@dimen/textsize_18"
+                app:autoSizeStepGranularity="@dimen/textsize_2"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/recyclerViewUserAlbumList"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewUserAlbumList"
                 android:layout_width="0dp"
@@ -25,7 +44,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewAlbumIdTitle" />
 
             <include
                 layout="@layout/no_data_layout"
