@@ -7,5 +7,5 @@ import com.techmahidra.optustest.data.response.UserImageInfo
 * */
 interface UserActionListener {
     fun onClickAction()
-    fun onClickAction(imageInfo : UserImageInfo)
+    fun onClickAction(imageInfo: UserImageInfo)
 }

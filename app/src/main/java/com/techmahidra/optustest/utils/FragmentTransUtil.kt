@@ -19,9 +19,13 @@ object FragmentTransUtil {
         supportFragmentManager.inTransaction { replace(frameId, fragment) }
     }
 
-    fun AppCompatActivity.replaceFragment(fragment: Fragment, frameId: Int, imageInfo : UserImageInfo) { // replace fragment
+    fun AppCompatActivity.replaceFragment(
+        fragment: Fragment,
+        frameId: Int,
+        imageInfo: UserImageInfo
+    ) { // replace fragment
         val bundle = Bundle()
-        bundle.putSerializable("image_info",imageInfo)
+        bundle.putSerializable("image_info", imageInfo)
         fragment.arguments = bundle
         supportFragmentManager.inTransaction { replace(frameId, fragment) }
     }
