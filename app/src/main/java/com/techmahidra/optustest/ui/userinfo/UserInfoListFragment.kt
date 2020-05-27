@@ -67,6 +67,7 @@ class UserInfoListFragment : Fragment(), UserActionListener {
     @RequiresApi(Build.VERSION_CODES.M)
     private fun init() {
         actionBar = (activity as UserInfoActivity).supportActionBar
+        actionBar?.show()
         actionBar?.title =
             UserInfoApplication.applicationContext().resources.getString(R.string.user_info)
         showUserData()

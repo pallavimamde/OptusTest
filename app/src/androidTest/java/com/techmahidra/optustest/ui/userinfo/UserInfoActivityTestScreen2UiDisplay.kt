@@ -31,7 +31,7 @@ class UserInfoActivityTestScreen2UiDisplay {
     @Test
     fun userInfoActivityTestScreen2() {
         try {
-            Thread.sleep(4000)
+            Thread.sleep(8000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }

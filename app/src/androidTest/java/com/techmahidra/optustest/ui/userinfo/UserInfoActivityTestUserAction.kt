@@ -27,6 +27,7 @@ import org.hamcrest.Matcher
 import org.hamcrest.Matchers
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
+import org.hamcrest.core.IsInstanceOf
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -40,55 +41,11 @@ class UserInfoActivityTestUserAction {
     @Rule
     @JvmField
     var mActivityTestRule = ActivityTestRule(UserInfoActivity::class.java)
+
     @Before
     fun setUp() {
         val intent = Intent()
         mActivityTestRule.launchActivity(intent)
-    }
-
-    @Test
-    fun onLaunchActionBarTitleIsDisplayed() {
-        val actionBar: ActionBar? = mActivityTestRule.activity.supportActionBar
-        Assert.assertNotNull(actionBar?.title)
-    }
-
-
-    @Test
-    fun appLaunchSuccessfully() {
-        ActivityScenario.launch(UserInfoActivity::class.java)
-    }
-
-    @Test
-    fun recyclerViewTestScrolling() {
-        Espresso.onView(ViewMatchers.withId(R.id.recyclerViewUserInfoList))
-            .check(matches(ViewMatchers.isDisplayed()))
-    }
-
-    @Test
-    fun recyclerViewTestScrollingToPositionEndIndex() {
-        Espresso.onView(ViewMatchers.withId(R.id.recyclerViewUserInfoList)).perform(ViewActions.swipeUp())
-    }
-
-    @Test
-    fun recyclerViewTestScrollingToPositionTop() {
-        Espresso.onView(ViewMatchers.withId(R.id.recyclerViewUserInfoList)).perform(ViewActions.swipeDown())
-    }
-
-    @Test
-    fun recyclerViewClick(){
-        onView(withId(R.id.recyclerViewUserInfoList)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(8, click()))
-    }
-
-    @Test
-    fun countPrograms() {
-        onView(withId(R.id.recyclerViewUserInfoList))
-            .check(matches(withItemCount(10)))
-    }
-
-    @Test
-    fun countProgramsWithViewAssertion() {
-        onView(withId(R.id.recyclerViewUserInfoList))
-            .check(hasItemCount(10))
     }
 
     @Test
@@ -115,9 +72,8 @@ class UserInfoActivityTestUserAction {
             )
         )
         constraintLayout.perform(click())
-
         try {
-            Thread.sleep(7000)
+            Thread.sleep(4000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
@@ -129,17 +85,205 @@ class UserInfoActivityTestUserAction {
                         withId(R.id.recyclerViewUserAlbumList),
                         childAtPosition(
                             withId(R.id.constraintLayUserAlbumList),
-                            0
+                            1
                         )
                     ),
-                    1
+                    0
                 ),
                 isDisplayed()
             )
         )
         constraintLayout2.perform(click())
+        try {
+            Thread.sleep(2000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        Espresso.pressBack()
+        try {
+            Thread.sleep(2000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        Espresso.pressBack()
 
     }
+
+
+    @Test
+    fun onLaunchActionBarTitleIsDisplayed() {
+        val actionBar: ActionBar? = mActivityTestRule.activity.supportActionBar
+        Assert.assertNotNull(actionBar?.title)
+    }
+
+
+    @Test
+    fun appLaunchSuccessfully() {
+        ActivityScenario.launch(UserInfoActivity::class.java)
+    }
+
+    @Test
+    fun recyclerViewTestScrolling() {
+        try {
+            Thread.sleep(3000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        val viewGroup1 = onView(
+            allOf(
+                withId(R.id.recyclerViewUserInfoList),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.constraintLayUserInfoList),
+                        childAtPosition(
+                            IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java),
+                            0
+                        )
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        viewGroup1.check(matches(ViewMatchers.isDisplayed()))
+    }
+
+    @Test
+    fun recyclerViewTestScrollingToPositionEndIndex() {
+        try {
+            Thread.sleep(3000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        val viewGroup1 = onView(
+            allOf(
+                withId(R.id.recyclerViewUserInfoList),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.constraintLayUserInfoList),
+                        childAtPosition(
+                            IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java),
+                            0
+                        )
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        viewGroup1.perform(ViewActions.swipeUp())
+    }
+
+    @Test
+    fun recyclerViewTestScrollingToPositionTop() {
+        try {
+            Thread.sleep(3000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        val viewGroup1 = onView(
+            allOf(
+                withId(R.id.recyclerViewUserInfoList),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.constraintLayUserInfoList),
+                        childAtPosition(
+                            IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java),
+                            0
+                        )
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        viewGroup1.perform(ViewActions.swipeDown())
+    }
+
+    @Test
+    fun recyclerViewClick() {
+        try {
+            Thread.sleep(3000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        val viewGroup1 = onView(
+            allOf(
+                withId(R.id.recyclerViewUserInfoList),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.constraintLayUserInfoList),
+                        childAtPosition(
+                            IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java),
+                            0
+                        )
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        viewGroup1.perform(
+            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+                8,
+                click()
+            )
+        )
+    }
+
+    @Test
+    fun countPrograms() {
+        try {
+            Thread.sleep(3000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        val viewGroup1 = onView(
+            allOf(
+                withId(R.id.recyclerViewUserInfoList),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.constraintLayUserInfoList),
+                        childAtPosition(
+                            IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java),
+                            0
+                        )
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        viewGroup1.check(matches(withItemCount(10)))
+    }
+
+    @Test
+    fun countProgramsWithViewAssertion() {
+        try {
+            Thread.sleep(3000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        val viewGroup1 = onView(
+            allOf(
+                withId(R.id.recyclerViewUserInfoList),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.constraintLayUserInfoList),
+                        childAtPosition(
+                            IsInstanceOf.instanceOf(android.widget.FrameLayout::class.java),
+                            0
+                        )
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        viewGroup1.check(hasItemCount(10))
+    }
+
+
     private fun childAtPosition(
         parentMatcher: Matcher<View>, position: Int
     ): Matcher<View> {
@@ -158,3 +302,22 @@ class UserInfoActivityTestUserAction {
         }
     }
 }
+
+private fun childAtPosition(
+    parentMatcher: Matcher<View>, position: Int
+): Matcher<View> {
+
+    return object : TypeSafeMatcher<View>() {
+        override fun describeTo(description: Description) {
+            description.appendText("Child at position $position in parent ")
+            parentMatcher.describeTo(description)
+        }
+
+        public override fun matchesSafely(view: View): Boolean {
+            val parent = view.parent
+            return parent is ViewGroup && parentMatcher.matches(parent)
+                    && view == parent.getChildAt(position)
+        }
+    }
+}
+

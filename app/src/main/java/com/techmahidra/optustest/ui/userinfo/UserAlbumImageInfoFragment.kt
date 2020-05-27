@@ -50,7 +50,7 @@ class UserAlbumImageInfoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         actionBar = (activity as UserInfoActivity).supportActionBar
         actionBar?.hide()
-            UserInfoApplication.applicationContext().resources.getString(R.string.photo_id) + binding.imageInfo?.photoId
+        UserInfoApplication.applicationContext().resources.getString(R.string.photo_id) + binding.imageInfo?.photoId
 
         swipeRefreshLayout.setOnRefreshListener {
             isRefreshing = true

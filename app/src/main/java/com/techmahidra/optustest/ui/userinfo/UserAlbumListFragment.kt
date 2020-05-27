@@ -121,7 +121,8 @@ class UserAlbumListFragment : Fragment(), UserActionListener {
     @SuppressLint("WrongConstant")
     fun updateUserUI(response: List<UserAlbumListResponse.AlbumListResponseItem>) {
         if (response.isNotEmpty()) {
-            textViewAlbumIdTitle.text = UserInfoApplication.applicationContext().resources.getString(R.string.album_id) + selectedUserId
+            textViewAlbumIdTitle.text =
+                UserInfoApplication.applicationContext().resources.getString(R.string.album_id) + selectedUserId
             modifiedUserAlbumList.clear()
             for (item in response) {
                 var isAllNull = false

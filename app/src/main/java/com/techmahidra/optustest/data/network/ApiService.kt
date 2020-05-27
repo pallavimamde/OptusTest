@@ -29,6 +29,7 @@ interface ApiService {
     @GET(API_GET_USER_ALBUM_LIST)
     fun getUserAlbumList(@Query("albumId") albumId: Int): Deferred<UserAlbumListResponse>
 
+
     // Create Retrofit object
     companion object {
 
