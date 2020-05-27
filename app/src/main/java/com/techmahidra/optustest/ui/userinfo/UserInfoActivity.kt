@@ -12,9 +12,10 @@ import com.techmahidra.optustest.utils.FragmentTransUtil.replaceFragment
 * Launching activity
 * */
 class UserInfoActivity : AppCompatActivity() {
-    companion object{
-        var selectedUserId  = 0
+    companion object {
+        var selectedUserId = 0
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_info)
@@ -28,12 +29,12 @@ class UserInfoActivity : AppCompatActivity() {
     }
 
     // replace fragment
-    fun replaceUserFragment(fragment: Fragment){
+    fun replaceUserFragment(fragment: Fragment) {
         replaceFragment(fragment, R.id.frameLayoutContainer)
     }
 
     // replace fragment with pass data
-    fun replaceUserFragment(fragment: Fragment, imgInfo : UserImageInfo){
+    fun replaceUserFragment(fragment: Fragment, imgInfo: UserImageInfo) {
         replaceFragment(fragment, R.id.frameLayoutContainer, imgInfo)
     }
 }

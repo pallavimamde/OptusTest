@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.techmahidra.optustest.BR
 import com.techmahidra.optustest.R
-import com.techmahidra.optustest.core.UserInfoApplication
 import com.techmahidra.optustest.data.response.UserInfoListResponse
 import com.techmahidra.optustest.databinding.AdapterUserInfoListBinding
 import com.techmahidra.optustest.ui.userinfo.UserInfoActivity.Companion.selectedUserId

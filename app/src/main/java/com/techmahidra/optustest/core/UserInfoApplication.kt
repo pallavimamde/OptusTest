@@ -6,7 +6,7 @@ import android.content.Context
 /*
 * UserInfoApplication -  Its base application class and its singleton instance using companion obj is used in application
 * */
-class UserInfoApplication :Application() {
+class UserInfoApplication : Application() {
 
     init {
         instance = this

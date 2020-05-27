@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.techmahidra.optustest.R
 import com.techmahidra.optustest.BR
-import com.techmahidra.optustest.core.UserInfoApplication
 import com.techmahidra.optustest.data.response.UserImageInfo
 import com.techmahidra.optustest.data.response.UserAlbumListResponse
 import com.techmahidra.optustest.databinding.AdapterAlbumListBinding

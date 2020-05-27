@@ -80,7 +80,8 @@ class UserInfoListFragment : Fragment(), UserActionListener {
             isRefreshing = true
             loadData(isRefreshing)
             swipeRefreshLayout.isRefreshing = false
-        }    }
+        }
+    }
 
 
     // get data from server
@@ -167,8 +168,8 @@ class UserInfoListFragment : Fragment(), UserActionListener {
 
     // show dialog while loading data from server
     fun showLoading() {
-          loadingDialog.setContentView(R.layout.progress_bar)
-          loadingDialog.show()
+        loadingDialog.setContentView(R.layout.progress_bar)
+        loadingDialog.show()
 
     }
 
