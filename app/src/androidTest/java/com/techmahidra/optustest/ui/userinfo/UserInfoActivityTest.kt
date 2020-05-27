@@ -91,10 +91,62 @@ class UserInfoActivityTest {
             .check(hasItemCount(10))
     }
 
-
-
     @Test
-    fun userInfoActivityTest() {
+    fun userInfoActivityTestUiAction() {
+        try {
+            Thread.sleep(4000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        val constraintLayout = onView(
+            allOf(
+                withId(R.id.constraintLayUserInfo),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.recyclerViewUserInfoList),
+                        childAtPosition(
+                            withId(R.id.constraintLayUserInfoList),
+                            0
+                        )
+                    ),
+                    0
+                ),
+                isDisplayed()
+            )
+        )
+        constraintLayout.perform(click())
+
+        try {
+            Thread.sleep(7000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        val constraintLayout2 = onView(
+            allOf(
+                withId(R.id.constraintLayUserAlbum),
+                childAtPosition(
+                    allOf(
+                        withId(R.id.recyclerViewUserAlbumList),
+                        childAtPosition(
+                            withId(R.id.constraintLayUserAlbumList),
+                            0
+                        )
+                    ),
+                    1
+                ),
+                isDisplayed()
+            )
+        )
+        constraintLayout2.perform(click())
+
+    }
+    @Test
+    fun userInfoActivityTestUidisplay() {
+        try {
+            Thread.sleep(4000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
         val textView = onView(
             allOf(
                 withText("User Info"),
@@ -112,7 +164,11 @@ class UserInfoActivityTest {
             )
         )
         textView.check(matches(withText("User Info")))
-
+        try {
+            Thread.sleep(1000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
         val textView2 = onView(
             allOf(
                 withId(R.id.textViewUserId), withText("Id:  1"),
@@ -130,7 +186,11 @@ class UserInfoActivityTest {
             )
         )
         textView2.check(matches(withText("Id:  1")))
-
+        try {
+            Thread.sleep(1000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
         val textView3 = onView(
             allOf(
                 withId(R.id.textViewUserName), withText("Name: Leanne Graham"),
@@ -148,7 +208,11 @@ class UserInfoActivityTest {
             )
         )
         textView3.check(matches(withText("Name: Leanne Graham")))
-
+        try {
+            Thread.sleep(1000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
         val textView4 = onView(
             allOf(
                 withId(R.id.textViewUserEmail), withText("Email: Sincere@april.biz"),
@@ -166,7 +230,11 @@ class UserInfoActivityTest {
             )
         )
         textView4.check(matches(withText("Email: Sincere@april.biz")))
-
+        try {
+            Thread.sleep(1000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
         val textView5 = onView(
             allOf(
                 withId(R.id.textViewUserPhone), withText("Phone: 1-770-736-8031 x56442"),
@@ -184,25 +252,11 @@ class UserInfoActivityTest {
             )
         )
         textView5.check(matches(withText("Phone: 1-770-736-8031 x56442")))
-
-        val textView6 = onView(
-            allOf(
-                withId(R.id.textViewUserPhone), withText("Phone: 1-770-736-8031 x56442"),
-                childAtPosition(
-                    allOf(
-                        withId(R.id.constraintLayUserInfo),
-                        childAtPosition(
-                            withId(R.id.recyclerViewUserInfoList),
-                            0
-                        )
-                    ),
-                    3
-                ),
-                isDisplayed()
-            )
-        )
-        textView6.check(matches(withText("Phone: 1-770-736-8031 x56442")))
-
+        try {
+            Thread.sleep(1000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
         val viewGroup = onView(
             allOf(
                 withId(R.id.constraintLayUserInfo),
@@ -220,8 +274,12 @@ class UserInfoActivityTest {
             )
         )
         viewGroup.check(matches(isDisplayed()))
-
-        val constraintLayout = onView(
+        try {
+            Thread.sleep(1000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+        val viewGroup2 = onView(
             allOf(
                 withId(R.id.constraintLayUserInfo),
                 childAtPosition(
@@ -232,12 +290,12 @@ class UserInfoActivityTest {
                             0
                         )
                     ),
-                    4
+                    0
                 ),
                 isDisplayed()
             )
         )
-        constraintLayout.perform(click())
+        viewGroup2.check(matches(isDisplayed()))
     }
 
     private fun childAtPosition(

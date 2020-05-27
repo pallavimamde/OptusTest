@@ -40,7 +40,7 @@ class UserAlbumImageInfoFragment : Fragment() {
             container,
             false
         )
-
+        loadData()
         return binding.getRoot()
     }
 
@@ -54,7 +54,6 @@ class UserAlbumImageInfoFragment : Fragment() {
 
         swipeRefreshLayout.setOnRefreshListener {
             isRefreshing = true
-            loadData()
             swipeRefreshLayout.isRefreshing = false
         }
 
