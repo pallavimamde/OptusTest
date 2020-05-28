@@ -6,3 +6,4 @@ Kotlin
 Android Architecture Components (ViewModel, LiveData)
 Retrofit
 Picasso to laod images
+Databinding
