@@ -1,2 +1,8 @@
 # OptusTest
-Optus Android programming Test Assignment 
+Android Recyclerview example
+
+Libraries used - 
+Kotlin
+Android Architecture Components (ViewModel, LiveData)
+Retrofit
+Picasso to laod images
